@@ -25,6 +25,7 @@ module.exports = {
 
     }
   },
+
   detailPage: async (req, res) => {
     try {
       const { id } = req.params
@@ -82,9 +83,6 @@ module.exports = {
       let tax = (10 / 100) * res_nominal._doc.price;
       let value = res_nominal._doc.price - tax;
 
-
-      console.log("res_payment >>")
-      console.log(res_payment._doc)
       const payload = {
         historyVoucherTopup: {
           gameName: res_voucher._doc.name,
@@ -193,7 +191,7 @@ module.exports = {
         {
           $group: {
             _id: '$category',
-            valeu: { $sum: '$value' }
+            value: { $sum: '$value' }
           }
         }
       ])
@@ -272,8 +270,6 @@ module.exports = {
             ...payload,
             avatar: filename
           }, { new: true, runValidators: true })
-
-          console.log(player)
 
           res.status(201).json({
             data: {
