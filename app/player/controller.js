@@ -214,8 +214,8 @@ module.exports = {
       });
 
       const history = await Transaction.find({ player: req.player._id })
-        .populate("category")
-        .sort({ updatedAt: -1 });
+        .populate('category')
+        .sort({ 'updatedAt': -1 });
 
       res.status(200).json({ data: history, count: count });
     } catch (err) {
