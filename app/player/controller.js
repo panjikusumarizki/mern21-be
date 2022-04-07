@@ -242,6 +242,7 @@ module.exports = {
 
   editProfile: async (req, res, next) => {
     try {
+      const { id } = req.params;
       const { name = "", phoneNumber = "" } = req.body;
 
       const payload = {};
@@ -267,7 +268,7 @@ module.exports = {
         src.pipe(dest);
 
         src.on("end", async () => {
-          let player = await Player.findOne({ _id: req.player._id });
+          let player = await Player.findOne({ _id: id });
 
           let currentImage = `${config.rootPath}/public/uploads/${player.avatar}`;
           if (fs.existsSync(currentImage)) {
